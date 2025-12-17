@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.amalixshop.controllers.DashboardController"
+      spacing="10"
+      alignment="CENTER"
+      prefWidth="800"
+      prefHeight="600">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Welcome to AmaliXShop Dashboard!"
+           style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <Label text="E-Commerce Management System"/>
+
+    <Separator prefWidth="700"/>
+
+    <HBox spacing="20">
+        <VBox spacing="10">
+            <Button text="View Products" prefWidth="200" prefHeight="80"/>
+            <Button text="Manage Orders" prefWidth="200" prefHeight="80"/>
+        </VBox>
+
+        <VBox spacing="10">
+            <Button text="Customer Management" prefWidth="200" prefHeight="80"/>
+            <Button text="Reports &amp; Analytics" prefWidth="200" prefHeight="80"/>
+        </VBox>
+    </HBox>
+
+    <Button fx:id="logoutButton" text="Logout" onAction="#handleLogout"
+            style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+
+</VBox>

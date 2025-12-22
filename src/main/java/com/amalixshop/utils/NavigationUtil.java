@@ -18,7 +18,15 @@ public class NavigationUtil {
     }
 
     public static void navigateToDashboard(Stage stage, String encryptedId) {
-        navigateTo("com/amalixshop/DashboardView.fxml", stage, "Dashboard", 800, 600);
+        navigateTo("com/amalixshop/DashboardView.fxml", stage, "Home", 800, 600);
+    }
+
+    public static void navigateToAdminDashboard(Stage stage, String encryptedId) {
+        navigateTo("com/amalixshop/AdminView.fxml", stage, "Admin Dashboard", 800, 600);
+    }
+
+    public static void navigateToProductManagement(Stage stage) {
+        navigateTo("com/amalixshop/ProductManagementView.fxml", stage, "Product Management", 900, 650);
     }
 
     private static void navigateTo(String fxmlPath, Stage stage, String title,

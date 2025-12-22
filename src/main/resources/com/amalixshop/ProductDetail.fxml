@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.text.Text?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.amalixshop.controllers.ProductDetailController"
+      spacing="15"
+      prefWidth="900"
+      prefHeight="700"
+      style="-fx-background-color: #f5f5f5;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Header -->
+    <HBox spacing="20" alignment="CENTER_LEFT">
+        <Button text="← Back to Products" onAction="#handleBack"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Add to Cart" onAction="#handleAddToCart"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 14px;"/>
+        <Button text="Buy Now" onAction="#handleBuyNow"
+                style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 14px;"/>
+    </HBox>
+
+    <!-- Product Details -->
+    <HBox spacing="30" VBox.vgrow="ALWAYS">
+        <!-- Left - Product Image -->
+        <VBox spacing="10" prefWidth="400">
+            <ImageView fx:id="productImageView" fitWidth="400" fitHeight="400"
+                       preserveRatio="true" style="-fx-border-color: #ddd; -fx-border-radius: 5;"/>
+            <HBox spacing="10" alignment="CENTER">
+                <!-- Thumbnail images could go here -->
+            </HBox>
+        </VBox>
+
+        <!-- Right - Product Info -->
+        <VBox spacing="15" HBox.hgrow="ALWAYS">
+            <Label fx:id="productNameLabel" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+
+            <HBox spacing="20" alignment="CENTER_LEFT">
+                <Label fx:id="priceLabel" style="-fx-font-size: 24px; -fx-text-fill: #e74c3c; -fx-font-weight: bold;"/>
+                <Label fx:id="stockLabel" style="-fx-font-size: 14px;"/>
+                <Label fx:id="categoryLabel" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;"/>
+            </HBox>
+
+            <Separator/>
+
+            <VBox spacing="10">
+                <Label text="Description" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <TextArea fx:id="descriptionTextArea" wrapText="true" editable="false"
+                          prefRowCount="6" VBox.vgrow="ALWAYS"/>
+            </VBox>
+
+            <Separator/>
+
+            <!-- Quantity Selector -->
+            <VBox spacing="10">
+                <Label text="Quantity" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Button text="-" onAction="#handleDecreaseQuantity" prefWidth="40"/>
+                    <TextField fx:id="quantityField" text="1" prefWidth="60" alignment="CENTER"/>
+                    <Button text="+" onAction="#handleIncreaseQuantity" prefWidth="40"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="totalPriceLabel" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                </HBox>
+            </VBox>
+
+            <Separator/>
+
+            <!-- Action Buttons -->
+            <HBox spacing="15">
+                <Button text="Add to Cart" onAction="#handleAddToCart"
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px;"
+                        prefWidth="150" prefHeight="40"/>
+                <Button text="Buy Now" onAction="#handleBuyNow"
+                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 14px;"
+                        prefWidth="150" prefHeight="40"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Write Review" onAction="#handleWriteReview"/>
+            </HBox>
+        </VBox>
+    </HBox>
+
+    <!-- Reviews Section -->
+    <VBox spacing="15">
+        <Label text="Customer Reviews" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+        <!-- Review Statistics -->
+        <HBox spacing="30" alignment="CENTER_LEFT">
+            <VBox alignment="CENTER">
+                <Label fx:id="averageRatingLabel" style="-fx-font-size: 36px; -fx-font-weight: bold;"/>
+                <Label text="out of 5"/>
+            </VBox>
+            <VBox>
+                <!-- Rating bars could go here -->
+            </VBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Write a Review" onAction="#handleWriteReview"
+                    style="-fx-background-color: #2c3e50; -fx-text-fill: white;"/>
+        </HBox>
+
+        <!-- Reviews List -->
+        <VBox fx:id="reviewsContainer" spacing="10">
+            <!-- Reviews will be dynamically added here -->
+        </VBox>
+    </VBox>
+
+</VBox>

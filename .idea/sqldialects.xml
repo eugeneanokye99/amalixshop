@@ -2,6 +2,7 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/.idea/queries/Query.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/amalixshop/dao/CategoryDAO.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/amalixshop/dao/CustomerDAO.java" dialect="GenericSQL" />
   </component>
 </project>

@@ -5,6 +5,7 @@ import com.amalixshop.models.Customer;
 import com.amalixshop.utils.ValidationUtil;
 import com.amalixshop.utils.AlertUtil;
 import java.security.MessageDigest;
+import java.util.Map;
 
 public class CustomerService {
     private final CustomerDAO customerDAO = new CustomerDAO();
@@ -45,7 +46,7 @@ public class CustomerService {
     /**
      * Customer login
      */
-    public String loginCustomer(String email, String password) {
+    public Map<String, String> loginCustomer(String email, String password) {
         // Validate
         if (!ValidationUtil.isValidEmail(email)) {
             AlertUtil.showValidationError("Please enter a valid email");
@@ -60,12 +61,12 @@ public class CustomerService {
         String hashedPassword = hashPassword(password);
 
         // Data access
-        String encryptedId = customerDAO.authenticateCustomer(email, hashedPassword);
+        Map<String, String> authResult = customerDAO.authenticateCustomer(email, hashedPassword);
 
         // Result
-        if (encryptedId != null) {
+        if (authResult != null) {
             AlertUtil.showSuccess("Login Successful", "Welcome back!");
-            return encryptedId;
+            return authResult;
         } else {
             AlertUtil.showError("Login Failed", "Invalid email or password");
             return null;

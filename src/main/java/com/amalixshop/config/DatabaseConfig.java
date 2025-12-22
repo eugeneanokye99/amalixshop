@@ -1,41 +1,31 @@
 package com.amalixshop.config;
 
-
-import java.util.Properties;
-
+import java.util.HashMap;
+import java.util.Map;
 
 public class DatabaseConfig {
-    private static Properties properties;
+    private static final Map<String, String> config;
 
     static {
-        properties = new Properties();
-      loadConfig();
+        config = new HashMap<>();
+        loadConfig();
     }
-
 
     public static void loadConfig() {
-        // Map environment variables to properties
-        properties.setProperty("DB_URL", "jdbc:postgresql://localhost:5432/amalixshop");
-
-        properties.setProperty("DB_USER", "postgres");
-        properties.setProperty("DB_PASSWORD", "Final@2025");
-
+        config.put("DB_URL", "jdbc:postgresql://localhost:5432/amalixshop");
+        config.put("DB_USER", "postgres");
+        config.put("DB_PASSWORD", "Final@2025");
     }
 
-
-    // Public getters
     public static String getUrl() {
-        return properties.getProperty("DB_URL");
+        return config.get("DB_URL");
     }
 
     public static String getUser() {
-        return properties.getProperty("DB_USER");
+        return config.get("DB_USER");
     }
 
     public static String getPassword() {
-        return properties.getProperty("DB_PASSWORD");
+        return config.get("DB_PASSWORD");
     }
-
-
-
 }

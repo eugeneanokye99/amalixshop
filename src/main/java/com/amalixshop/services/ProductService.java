@@ -63,13 +63,12 @@ public class ProductService {
         }
     }
 
-    public Product getProductById(int productId) {
-        try {
-            return productDAO.getProductById(productId);
-        } catch (Exception e) {
-            System.err.println("Error fetching product: " + e.getMessage());
-            return null;
-        }
+    public List<Product> searchProducts(String query) {
+        return productDAO.searchProducts(query);
+    }
+
+    public List<Product> getProductsByCategory(String categoryName) {
+        return productDAO.getProductsByCategory(categoryName);
     }
 
 

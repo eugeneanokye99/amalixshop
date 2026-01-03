@@ -100,6 +100,7 @@ public class ProductDAO {
 
                 // Set category name
                 product.setCategoryName(rs.getString("category_name"));
+                product.setStockQuantity(rs.getInt("stock_quantity"));
 
                 products.add(product);
             }
@@ -140,5 +141,88 @@ public class ProductDAO {
         }
 
         return null;
+    }
+
+    public List<Product> searchProducts(String query) {
+        List<Product> products = new ArrayList<>();
+
+        if (query == null || query.trim().isEmpty()) {
+            return getAllProducts();
+        }
+
+        String searchTerm = "%" + query.toLowerCase() + "%";
+        String sql = "SELECT p.*, c.category_name, i.stock_quantity " +
+                "FROM products p " +
+                "LEFT JOIN categories c ON p.category_id = c.category_id " +
+                "LEFT JOIN inventory i ON p.product_id = i.product_id " +
+                "WHERE LOWER(p.product_name) LIKE ? " +
+                "OR LOWER(p.description) LIKE ? " +
+                "OR LOWER(c.category_name) LIKE ? " +
+                "ORDER BY p.product_name";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, searchTerm);
+            stmt.setString(2, searchTerm);
+            stmt.setString(3, searchTerm);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Product product = mapResultSetToProduct(rs);
+                    products.add(product);
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error searching products: " + e.getMessage());
+        }
+
+        return products;
+    }
+
+    public List<Product> getProductsByCategory(String categoryName) {
+        List<Product> products = new ArrayList<>();
+
+        String sql = "SELECT p.*, c.category_name, i.stock_quantity " +
+                "FROM products p " +
+                "INNER JOIN categories c ON p.category_id = c.category_id " +
+                "LEFT JOIN inventory i ON p.product_id = i.product_id " +
+                "WHERE c.category_name = ? " +
+                "ORDER BY p.product_name";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, categoryName);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Product product = mapResultSetToProduct(rs);
+                    products.add(product);
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error fetching products by category: " + e.getMessage());
+        }
+
+        return products;
+    }
+
+    // Helper method to map ResultSet to Product
+    private Product mapResultSetToProduct(ResultSet rs) throws SQLException {
+        Product product = new Product(
+                rs.getString("product_name"),
+                rs.getString("description"),
+                rs.getDouble("price"),
+                EncryptionUtil.encrypt(rs.getInt("category_id"))
+        );
+
+        product.setProductId(EncryptionUtil.encrypt(rs.getInt("product_id")));
+        product.setCategoryName(rs.getString("category_name"));
+        product.setStockQuantity(rs.getInt("stock_quantity"));
+
+        return product;
     }
 }

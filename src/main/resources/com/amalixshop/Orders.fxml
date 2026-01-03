@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.amalixshop.controllers.OrdersController"
+            fitToWidth="true"
+            hbarPolicy="NEVER"
+            style="-fx-background-color: #f5f5f5;">
+
+    <VBox spacing="20"
+          prefWidth="1200"
+          style="-fx-background-color: #f5f5f5;">
+
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+
+        <!-- Header -->
+        <HBox spacing="20" alignment="CENTER_LEFT">
+            <Button text="← Back to Dashboard" onAction="#handleBackToDashboard"
+                    style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-background-radius: 4; -fx-padding: 8 15;"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button text="🔄 Refresh" onAction="#handleRefresh"
+                    style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 4; -fx-padding: 8 15;"/>
+        </HBox>
+
+        <!-- Title -->
+        <Label fx:id="titleLabel" text="My Orders"
+               style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+        <!-- Stats -->
+        <Label fx:id="statsLabel" text=""
+               style="-fx-font-size: 16px; -fx-text-fill: #7f8c8d;"/>
+
+        <!-- Filters -->
+        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 8;
+                                  -fx-border-color: #e0e0e0; -fx-border-radius: 8; -fx-border-width: 1;">
+
+            <Label text="Filter &amp; Sort"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+            <Separator style="-fx-background-color: #e0e0e0;"/>
+
+            <HBox spacing="20" alignment="CENTER_LEFT">
+                <!-- Search -->
+                <VBox spacing="5">
+                    <Label text="Search Orders" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;"/>
+                    <TextField fx:id="searchField" promptText="Search by order ID, product name..."
+                               style="-fx-pref-width: 250;"/>
+                </VBox>
+
+                <!-- Status Filter -->
+                <VBox spacing="5">
+                    <Label text="Status" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;"/>
+                    <ComboBox fx:id="statusFilterCombo" style="-fx-pref-width: 150;"/>
+                </VBox>
+
+                <!-- Sort -->
+                <VBox spacing="5">
+                    <Label text="Sort By" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;"/>
+                    <ComboBox fx:id="sortCombo" style="-fx-pref-width: 150;"/>
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Clear Filters Button -->
+                <Button text="Clear Filters" onAction="#handleClearFilters"
+                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-background-radius: 4; -fx-padding: 8 15;"/>
+            </HBox>
+        </VBox>
+
+        <!-- Orders Container -->
+        <VBox fx:id="ordersContainer" spacing="20">
+            <!-- Orders will be dynamically added here -->
+        </VBox>
+
+        <!-- No Orders Container (VBox) -->
+        <VBox fx:id="noOrdersContainer" alignment="CENTER" spacing="20" visible="false"
+              style="-fx-padding: 40; -fx-background-color: white; -fx-background-radius: 8;">
+            <Label text="📦" style="-fx-font-size: 64px;"/>
+            <Label fx:id="noOrdersMessage" text="No orders found"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+            <Label text="Your order history will appear here"
+                   style="-fx-font-size: 16px; -fx-text-fill: #7f8c8d;"/>
+            <Button text="Start Shopping" onAction="#handleBackToDashboard"
+                    style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;
+                           -fx-font-size: 14px; -fx-background-radius: 4; -fx-padding: 10 30;"/>
+        </VBox>
+
+    </VBox>
+
+</ScrollPane>

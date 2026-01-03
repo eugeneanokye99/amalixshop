@@ -70,10 +70,10 @@
             <!-- Pagination -->
             <HBox spacing="10" alignment="CENTER">
                 <Button text="← Previous" onAction="#handlePreviousPage"
-                        disable="true" fx:id="prevPageBtn"/>
+                        fx:id="prevPageBtn"/>
                 <Label fx:id="pageLabel" text="Page 1"/>
                 <Button text="Next →" onAction="#handleNextPage"
-                        disable="true" fx:id="nextPageBtn"/>
+                        fx:id="nextPageBtn"/>
             </HBox>
         </VBox>
 
@@ -87,8 +87,7 @@
             <Button text="Cart" onAction="#handleViewCart" prefHeight="40"/>
             <Separator/>
             <Label text="Account" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
-            <Button text="Profile" onAction="#handleViewProfile"/>
-            <Button text="Settings"/>
+
         </VBox>
     </HBox>
 

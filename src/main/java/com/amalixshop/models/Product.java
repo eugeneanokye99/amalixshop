@@ -7,6 +7,7 @@ public class Product {
     private final double price;
     private final String categoryId;
     private String categoryName;
+    private int stockQuantity;
 
     public Product(String productName, String description, double price, String categoryId) {
         this.productName = productName;
@@ -22,8 +23,15 @@ public class Product {
     public double getPrice() { return price; }
     public String getCategoryId() { return categoryId; }
     public String getCategoryName() { return categoryName; } // Add this
+    public int getStockQuantity() {
+        return stockQuantity;
+    }
+
 
     // Setters
     public void setProductId(String productId) { this.productId = productId; }
     public void setCategoryName(String categoryName) { this.categoryName = categoryName; }
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
+    }
 }
